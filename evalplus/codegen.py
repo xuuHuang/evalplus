@@ -137,7 +137,8 @@ def run_codegen(
     enable_chunked_prefill: bool = False,
     dtype: str = "bfloat16",
     gptqmodel_backend: str = "auto",  # For GPTQModel
-    gguf_file: Optional[str] = None
+    gguf_file: Optional[str] = None,
+    lang: str = "en",
 ):
     assert dataset in ["humaneval", "mbpp", "evalperf"], f"Invalid dataset {dataset}"
     assert evalperf_type is None or evalperf_type in [
@@ -150,6 +151,7 @@ def run_codegen(
     identifier = model.strip("./").replace("/", "--") + f"_{backend}_temp_{temperature}"
     if evalperf_type:
         identifier += f"-{evalperf_type}"
+    identifier += f"-{lang}"
 
     target_path = os.path.join(root, dataset, identifier)
     if jsonl_fmt:
@@ -158,7 +160,7 @@ def run_codegen(
         os.makedirs(target_path, exist_ok=True)
 
     if dataset == "humaneval":
-        dataset_dict = get_human_eval_plus(version=version)
+        dataset_dict = get_human_eval_plus(version=version, lang=lang)
     elif dataset == "mbpp":
         dataset_dict = get_mbpp_plus(version=version)
     elif dataset == "evalperf":

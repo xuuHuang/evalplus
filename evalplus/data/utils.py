@@ -4,8 +4,6 @@ import os
 from os import PathLike
 from typing import Dict, Iterable
 
-import tempdir
-import wget
 from appdirs import user_cache_dir
 
 CACHE_DIR = user_cache_dir("evalplus")
@@ -29,6 +27,8 @@ def make_cache(gzip_url, cache_path):
     if not os.path.exists(cache_path):
         # Install HumanEval dataset and parse as jsonl
         print(f"Downloading dataset from {gzip_url}")
+        import tempdir
+        import wget
         with tempdir.TempDir() as tmpdir:
             plus_gz_path = os.path.join(tmpdir, f"data.jsonl.gz")
             wget.download(gzip_url, plus_gz_path)

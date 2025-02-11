@@ -3,8 +3,6 @@ import json
 import os
 from typing import Dict
 
-import wget
-
 from evalplus.data.utils import (
     CACHE_DIR,
     completeness_check,
@@ -167,6 +165,7 @@ def get_mbpp() -> Dict[str, Dict]:
 
         # Install MBPP-sanitized from scratch
         print("Downloading original MBPP dataset...")
+        import wget
         wget.download(
             "https://github.com/google-research/google-research/raw/master/mbpp/sanitized-mbpp.json",
             mbpp_path,
