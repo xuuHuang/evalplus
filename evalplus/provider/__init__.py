@@ -18,6 +18,7 @@ def make_model(
     tp=1,
     enable_prefix_caching=False,
     enable_chunked_prefill=False,
+    max_new_tokens: int = 768,
     # openai only
     base_url=None,
     # hf only
@@ -34,6 +35,7 @@ def make_model(
             name=model,
             batch_size=batch_size,
             temperature=temperature,
+            max_new_tokens=max_new_tokens,
             dataset=dataset,
             force_base_prompt=force_base_prompt,
             tensor_parallel_size=tp,

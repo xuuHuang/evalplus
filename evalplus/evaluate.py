@@ -126,6 +126,7 @@ def check_correctness(
 
 def evaluate(
     dataset: str,
+    lang: str = "en",
     samples: Optional[str] = None,
     base_only: bool = False,
     parallel: Optional[int] = None,
@@ -147,6 +148,7 @@ def evaluate(
         )
         samples = run_codegen(
             dataset=dataset,
+            lang=lang,
             gguf_file=gguf_file,
             **model_kwargs,
         )

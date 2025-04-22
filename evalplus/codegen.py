@@ -116,6 +116,7 @@ def codegen(
 def run_codegen(
     model: str,
     dataset: str,
+    lang: str = "en",
     root: str = "evalplus_results",
     bs: Optional[int] = None,
     n_samples: int = 1,
@@ -138,7 +139,7 @@ def run_codegen(
     dtype: str = "bfloat16",
     gptqmodel_backend: str = "auto",  # For GPTQModel
     gguf_file: Optional[str] = None,
-    lang: str = "en",
+    max_new_tokens: int = 768,
 ):
     assert dataset in ["humaneval", "mbpp", "evalperf"], f"Invalid dataset {dataset}"
     assert evalperf_type is None or evalperf_type in [
@@ -243,6 +244,7 @@ def run_codegen(
         dtype=dtype,
         gptqmodel_backend=gptqmodel_backend,
         gguf_file=gguf_file,
+        max_new_tokens=max_new_tokens,
     )
 
     codegen(
